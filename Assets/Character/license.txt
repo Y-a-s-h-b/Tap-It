@@ -1,0 +1,11 @@
+Model Information:
+* title:	PVZ Pea Shooter
+* source:	https://sketchfab.com/3d-models/pvz-pea-shooter-36c813f7a6ff4b67a163d53b59eab4e4
+* author:	magicwendric (https://sketchfab.com/magicwendric)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PVZ Pea Shooter" (https://sketchfab.com/3d-models/pvz-pea-shooter-36c813f7a6ff4b67a163d53b59eab4e4) by magicwendric (https://sketchfab.com/magicwendric) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
