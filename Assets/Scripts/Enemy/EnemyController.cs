@@ -6,6 +6,11 @@ public class EnemyController : MonoBehaviour
 {
     public int health = 10;
 
+    private void Start()
+    {
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
@@ -14,10 +19,4 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    // Start is called before the first frame update
-    void Start() { }
-
-    // Update is called once per frame
-    void Update() { }
 }

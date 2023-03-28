@@ -40,8 +40,6 @@ public class Weapon : MonoBehaviour
         Vector2 shotPointVec = new Vector2(shotX, shotY);
         //(origin.y + (1.6 * Mathf.Sin(angle)))))
 
-        Debug.Log(index);
-
         if (Input.GetMouseButtonDown(0))
         {
             if (Time.time > shotTime)

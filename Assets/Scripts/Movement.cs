@@ -8,19 +8,26 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveAmount;
     private Animator anim;
+
+    [HideInInspector]
+    public Vector2 position;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim= GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 moveInput = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        );
         moveAmount = moveInput.normalized * speed;
-        if(moveInput != Vector2.zero)
+        if (moveInput != Vector2.zero)
         {
             anim.SetBool("isRunning", true);
         }
@@ -28,9 +35,11 @@ public class Movement : MonoBehaviour
         {
             anim.SetBool("isRunning", false);
         }
+        position = transform.position;
     }
+
     private void FixedUpdate()
-    {   
-        rb.MovePosition(rb.position + moveAmount*Time.fixedDeltaTime);
+    {
+        rb.MovePosition(rb.position + moveAmount * Time.fixedDeltaTime);
     }
 }

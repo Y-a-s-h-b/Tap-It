@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9096023122678136605}
   m_Layer: 0
   m_Name: Peashooter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 516077004020353798, guid: d95ffdce45eceb741ab3b2db6b4aa3ab, type: 3}
-  shotPoint: {fileID: 0}
   delay: 1
   spriteList:
   - {fileID: 1547961651, guid: 1e3b2663ac2b77f4b83a496e41a28e60, type: 3}
@@ -146,7 +145,8 @@ MonoBehaviour:
   - {fileID: -1157379250, guid: 1e3b2663ac2b77f4b83a496e41a28e60, type: 3}
   - {fileID: -313768707, guid: 1e3b2663ac2b77f4b83a496e41a28e60, type: 3}
   - {fileID: 357892455, guid: 1e3b2663ac2b77f4b83a496e41a28e60, type: 3}
-  shotPointObject: {fileID: 0}
+  ang: 0
+  pea: {fileID: 0}
 --- !u!95 &9096023122678136605
 Animator:
   serializedVersion: 5

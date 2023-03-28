@@ -16,7 +16,6 @@ public class Projectile : MonoBehaviour
     public void SetAngle(float anglep)
     {
         ang = anglep;
-        Debug.Log(ang);
     }
 
     void Start()

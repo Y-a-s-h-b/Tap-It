@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : EnemyController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float stopDistance;
+    public GameObject player;
+    public float speed;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (player.transform != null)
+        {
+            if (Vector2.Distance(this.transform.position, player.transform.position) > stopDistance)
+            {
+                this.transform.position = Vector2.MoveTowards(
+                    transform.position,
+                    player.transform.position,
+                    speed * Time.deltaTime
+                );
+            }
+        }
     }
 }
