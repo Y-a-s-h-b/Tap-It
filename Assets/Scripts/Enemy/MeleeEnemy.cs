@@ -5,22 +5,47 @@ using UnityEngine;
 public class MeleeEnemy : EnemyController
 {
     public float stopDistance;
-    public GameObject player;
+
+    //public GameObject player;
     public float speed;
+    private float attackTime;
+    public float attackSpeed;
 
     // Update is called once per frame
     private void Update()
     {
-        if (player.transform != null)
+        if (player != null)
         {
-            if (Vector2.Distance(this.transform.position, player.transform.position) > stopDistance)
+            if (Vector2.Distance(this.transform.position, player.position) > stopDistance)
             {
                 this.transform.position = Vector2.MoveTowards(
                     transform.position,
-                    player.transform.position,
+                    player.position,
                     speed * Time.deltaTime
                 );
             }
+            else if (Time.time >= attackTime)
+            {
+                StartCoroutine(Attack());
+                attackTime = Time.time + timeBetweenAttacks;
+            }
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        player.GetComponent<Movement>().TakeDamage(damage);
+
+        Vector2 originalPosition = transform.position;
+        Vector2 targetPosition = player.position;
+
+        float percent = 0;
+        while (percent <= 1)
+        {
+            percent += Time.deltaTime * attackSpeed;
+            float formula = (-Mathf.Pow(percent, 2) + percent) * 4;
+            transform.position = Vector2.Lerp(originalPosition, targetPosition, formula);
+            yield return null;
         }
     }
 }

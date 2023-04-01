@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     [HideInInspector]
     public Vector2 position;
 
+    public float health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,5 +43,14 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveAmount * Time.fixedDeltaTime);
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
