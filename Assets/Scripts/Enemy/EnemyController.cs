@@ -7,11 +7,12 @@ public class EnemyController : MonoBehaviour
     public int health = 10;
     public float timeBetweenAttacks;
     public int damage;
+    public float speed;
 
     [HideInInspector]
     public Transform player;
 
-    private void Start()
+    public virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }

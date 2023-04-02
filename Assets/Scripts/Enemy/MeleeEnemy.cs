@@ -7,7 +7,7 @@ public class MeleeEnemy : EnemyController
     public float stopDistance;
 
     //public GameObject player;
-    public float speed;
+
     private float attackTime;
     public float attackSpeed;
 
