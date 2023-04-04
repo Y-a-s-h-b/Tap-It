@@ -15,6 +15,7 @@ public class Summoner : EnemyController
     public EnemyController enemyToSummon;
     public float attackSpeed;
     public float stopDistance;
+    private float attackTime;
 
     public override void Start()
     {
@@ -56,6 +57,11 @@ public class Summoner : EnemyController
                     player.position,
                     speed * Time.deltaTime
                 );
+            }
+            else if (Time.time >= attackTime)
+            {
+                attackTime = Time.time + timeBetweenAttacks;
+                StartCoroutine(Attack());
             }
         }
     }
