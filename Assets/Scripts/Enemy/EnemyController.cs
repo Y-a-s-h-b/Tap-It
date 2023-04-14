@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
 
     [HideInInspector]
     public Transform player;
+    Vector2 direction;
 
     public virtual void Start()
     {
@@ -24,5 +25,12 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        Vector2 targetPos = player.transform.position;
+        direction = targetPos - (Vector2)transform.position;
+        transform.up = direction;
     }
 }
