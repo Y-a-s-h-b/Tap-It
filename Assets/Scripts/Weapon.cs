@@ -1,19 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
 
 public class Weapon : MonoBehaviour
 {
+    public float cooldownSpeed;
+    public float fireRate;
+    public float recoilCooldown;
+    private float accuracy;
+    public float maxSpreadAngle;
+    public float timetillMaxSpread;
     public GameObject projectile;
-    public float delay;
-    private float shotTime;
-    public Sprite[] spriteList;
-    private float index;
-    private int spriteCount = 8;
-
-    //public GameObject shotPointObject;
-    public float ang;
-    public Projectile pea;
+    public GameObject bulletPoint;
+    public AudioSource peashot;
+    public AudioClip singleShot;
 
     // Start is called before the first frame update
     void Start() { }
@@ -21,33 +24,52 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 origin = new Vector3(transform.position.x, transform.position.y + 0.2f, 0);
-
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - origin;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        float ang = Mathf.Atan2(direction.y, direction.x);
-
-        //Quaternion rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
-        //shotPointObject.rotation = rotation;
-
-        if (angle < 0)
-            angle += 360;
-        index = (Mathf.Floor(angle / (360 / spriteCount)));
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = spriteList[(int)index];
-        float shotX = origin.x + (0.6f * Mathf.Cos(ang));
-        float shotY = origin.y + (0.6f * Mathf.Sin(ang));
-
-        Vector2 shotPointVec = new Vector2(shotX, shotY);
-        //(origin.y + (1.6 * Mathf.Sin(angle)))))
+        cooldownSpeed += Time.deltaTime * 60f;
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (Time.time > shotTime)
+            Debug.Log("else");
+            accuracy += Time.deltaTime * 4f;
+            if (cooldownSpeed >= fireRate)
             {
-                Projectile peaO = Instantiate(pea, shotPointVec, transform.rotation);
-                peaO.SetAngle(ang);
-                shotTime = Time.time + delay;
+                Debug.Log("if");
+                Shoot();
+                peashot.PlayOneShot(singleShot);
+                cooldownSpeed = 0;
+                recoilCooldown = 1;
             }
+        }
+        else
+        {
+            recoilCooldown -= Time.deltaTime;
+            if (recoilCooldown <= 1)
+            {
+                accuracy = 0.0f;
+            }
+        }
+    }
+
+    private void Shoot()
+    {
+        RaycastHit hit;
+        Quaternion peaRotation = Quaternion.LookRotation(transform.forward);
+        float currentSpread = Mathf.Lerp(0.0f, maxSpreadAngle, accuracy / timetillMaxSpread);
+        peaRotation = Quaternion.RotateTowards(
+            peaRotation,
+            UnityEngine.Random.rotation,
+            UnityEngine.Random.Range(0.0f, currentSpread)
+        );
+        if (
+            Physics.Raycast(
+                transform.position,
+                peaRotation * Vector3.forward,
+                out hit,
+                Mathf.Infinity
+            )
+        )
+        {
+            GameObject pea = Instantiate(projectile, bulletPoint.transform.position, peaRotation);
+            pea.GetComponent<MovePea>().hitPoint = hit.point;
         }
     }
 }
