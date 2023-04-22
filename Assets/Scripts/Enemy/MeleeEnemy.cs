@@ -16,9 +16,10 @@ public class MeleeEnemy : EnemyController
     {
         if (player != null)
         {
-            if (Vector2.Distance(this.transform.position, player.position) > stopDistance)
+            gameObject.transform.LookAt(player);
+            if (Vector3.Distance(this.transform.position, player.position) > stopDistance)
             {
-                this.transform.position = Vector2.MoveTowards(
+                this.transform.position = Vector3.MoveTowards(
                     transform.position,
                     player.position,
                     speed * Time.deltaTime
@@ -36,15 +37,15 @@ public class MeleeEnemy : EnemyController
     {
         player.GetComponent<Movement>().TakeDamage(damage);
 
-        Vector2 originalPosition = transform.position;
-        Vector2 targetPosition = player.position;
+        Vector3 originalPosition = transform.position;
+        Vector3 targetPosition = player.position;
 
         float percent = 0;
         while (percent <= 1)
         {
             percent += Time.deltaTime * attackSpeed;
             float formula = (-Mathf.Pow(percent, 2) + percent) * 4;
-            transform.position = Vector2.Lerp(originalPosition, targetPosition, formula);
+            transform.position = Vector3.Lerp(originalPosition, targetPosition, formula);
             yield return null;
         }
     }

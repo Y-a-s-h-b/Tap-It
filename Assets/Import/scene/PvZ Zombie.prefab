@@ -566,7 +566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6170664207911070724}
   m_Layer: 0
-  m_Name: scenes
+  m_Name: PvZ Zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

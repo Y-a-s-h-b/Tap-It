@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
@@ -8,10 +9,11 @@ public class EnemyController : MonoBehaviour
     public float timeBetweenAttacks;
     public int damage;
     public float speed;
+    private float rotateSpeed = 5f;
 
     [HideInInspector]
     public Transform player;
-    Vector2 direction;
+    Vector3 direction;
 
     public virtual void Start()
     {
@@ -29,8 +31,9 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 targetPos = player.transform.position;
-        direction = targetPos - (Vector2)transform.position;
+        Debug.Log(player.transform.position);
+        Vector3 targetPos = player.transform.position;
+        direction = targetPos - transform.position;
         transform.up = direction;
     }
 }
