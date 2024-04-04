@@ -8,12 +8,28 @@ public class MovePea : MonoBehaviour
     public GameObject explode;
     public GameObject splash;
     public int speed;
+    private Rigidbody rb;
+    private InputHandler _input;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.GetComponent<Rigidbody>()
-            .AddForce((hitPoint - this.transform.position).normalized * speed);
+        Debug.Log(hitPoint);
+        rb = GetComponent<Rigidbody>();
+        Move();
+    }
+
+    void Move()
+    {
+        if (hitPoint == new Vector3(0.0f, 0.0f, 0.0f))
+        {
+            Debug.Log(Input.mousePosition);
+            rb.AddForce((Input.mousePosition - transform.position).normalized * speed);
+        }
+        else
+        {
+            rb.AddForce((hitPoint - this.transform.position).normalized * speed);
+        }
     }
 
     // Update is called once per frame

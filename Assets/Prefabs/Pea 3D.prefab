@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoint: {x: 0, y: 0, z: 0}
-  explode: {fileID: 2252392817586101085, guid: 5c8c25e81b61b594cb92ac968c6d34d6, type: 3}
-  splash: {fileID: 1891387747629713988, guid: 8d3afdb77f94155488f806a266b24f67, type: 3}
+  explode: {fileID: 2850521310887428384, guid: 5c82f6fb03807524d8492cac34a0f023, type: 3}
+  splash: {fileID: 2850521310887428384, guid: 5c82f6fb03807524d8492cac34a0f023, type: 3}
   speed: 500
 --- !u!1 &444835809565405215
 GameObject:

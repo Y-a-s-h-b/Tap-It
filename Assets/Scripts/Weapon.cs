@@ -51,6 +51,7 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
+        Ray ray = new Ray(transform.position, bulletPoint.transform.forward);
         RaycastHit hit;
         Quaternion peaRotation = Quaternion.LookRotation(transform.forward);
         float currentSpread = Mathf.Lerp(0.0f, maxSpreadAngle, accuracy / timetillMaxSpread);
@@ -68,8 +69,18 @@ public class Weapon : MonoBehaviour
             )
         )
         {
+            Debug.DrawRay(ray.origin, ray.direction * 20f, Color.blue, 1);
             GameObject pea = Instantiate(projectile, bulletPoint.transform.position, peaRotation);
             pea.GetComponent<MovePea>().hitPoint = hit.point;
+        }
+        else
+        {
+            Debug.DrawRay(ray.origin, ray.direction * 20f, Color.blue, 1);
+            GameObject pea = Instantiate(
+                projectile,
+                bulletPoint.transform.position,
+                Quaternion.identity
+            );
         }
     }
 }
